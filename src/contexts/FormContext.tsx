@@ -1,6 +1,14 @@
 import { createContext, useContext, useReducer } from 'react';
 
-const initialData = {
+type State = {
+  currentStep: number;
+  name: string;
+  level: 0 | 1;
+  email: string;
+  github: string;
+};
+
+const initialData: State = {
   currentStep: 0,
   name: '',
   level: 0,
