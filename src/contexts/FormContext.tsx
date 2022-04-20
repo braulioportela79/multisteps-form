@@ -13,6 +13,11 @@ type Action = {
   payload: any;
 };
 
+type ContextType = {
+  state: State;
+  dispatch: (action: Action) => void;
+};
+
 const initialData: State = {
   currentStep: 0,
   name: '',
@@ -22,7 +27,7 @@ const initialData: State = {
 };
 
 // Context
-const FormContext = createContext(undefined);
+const FormContext = createContext<ContextType | undefined>(undefined);
 
 // Reducer
 enum FormActions {
