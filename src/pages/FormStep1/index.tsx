@@ -2,14 +2,23 @@ import { useNavigate } from 'react-router-dom';
 import * as C from './styles';
 import { useForm, FormActions } from '../../contexts/FormContext';
 import { Theme } from '../../components/Theme';
-import { ChangeEvent } from 'react';
+import { ChangeEvent, useEffect } from 'react';
 
 export const FormStep1 = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useForm();
+
+  useEffect(() => {
+    dispatch({
+      type: FormActions.setCurrentStep,
+      payload: 1,
+    });
+  });
+
   const handleNextStep = () => {
     navigate('/step2');
   };
+
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     dispatch({
       type: FormActions.setName,
