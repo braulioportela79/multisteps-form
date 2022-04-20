@@ -10,10 +10,14 @@ export const FormStep2 = () => {
   const { state, dispatch } = useForm();
 
   useEffect(() => {
-    dispatch({
-      type: FormActions.setCurrentStep,
-      payload: 2,
-    });
+    if (state.name === '') {
+      navigate('/');
+    } else {
+      dispatch({
+        type: FormActions.setCurrentStep,
+        payload: 2,
+      });
+    }
   });
 
   const handleNextStep = () => {
@@ -25,18 +29,20 @@ export const FormStep2 = () => {
   };
 
   const setLevel = (level: number) => {
-      dispatch ({
-          type: FormActions.setLevel,
-          payload: level
-      });
-  }
+    dispatch({
+      type: FormActions.setLevel,
+      payload: level,
+    });
+  };
 
   return (
     <Theme>
       <C.Container>
         <p>Step 2/3</p>
-        <h1>Let's begin with your name</h1>
-        <p>Insert Full Name</p>
+        <h1>{state.name}, what best describes you?</h1>
+        <p>
+          Choose an option that best suit your current professional knowledge.
+        </p>
         <hr />
 
         <SelectOption
@@ -44,7 +50,7 @@ export const FormStep2 = () => {
           description='I started to develop less than 2 years'
           icon='🥳'
           selected={state.level === 0}
-          onClick={()=>setLevel(0)}
+          onClick={() => setLevel(0)}
         />
 
         <SelectOption
@@ -52,7 +58,7 @@ export const FormStep2 = () => {
           description='I develop for over 2 years'
           icon='😎'
           selected={state.level === 1}
-          onClick={()=>setLevel(1)}
+          onClick={() => setLevel(1)}
         />
 
         <button onClick={handleNextStep}>Next</button>
