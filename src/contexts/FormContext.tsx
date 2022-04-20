@@ -1,5 +1,13 @@
 import { createContext, useContext, useReducer } from 'react';
 
+const initialData = {
+    currentStep: 0,
+    name: '',
+    level: 0,
+    email: '',
+    github: ''
+}
+
 // Context
 const FormContext = createContext(undefined);
 
@@ -27,3 +35,17 @@ const formReducer = (state, action) => {
       return state;
   }
 };
+
+// Provider
+const FormProvider = ({children}) => {
+    const [state, dispatch] = useReducer(formReducer, initialData);
+    const value = { state, dispatch};
+    return (
+        <FormContext.Provider value={value}>
+            {children}
+        </FormContext.Provider>
+    )
+};
+
+
+
