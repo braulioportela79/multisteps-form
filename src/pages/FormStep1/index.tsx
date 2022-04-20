@@ -1,8 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import * as C from './styles';
 import { Theme } from '../../components/Theme';
 
 export const FormStep1 = () => {
-  const handleNextStep = () => {};
+  const navigate = useNavigate();
+  const handleNextStep = () => {
+    navigate('/step2');
+  };
 
   return (
     <Theme>
@@ -12,7 +16,7 @@ export const FormStep1 = () => {
         <p>Insert Full Name</p>
 
         <hr />
-        <label htmlFor=''>
+        <label>
           Full Name
           <input type='text' autoFocus />
         </label>
