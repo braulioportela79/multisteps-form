@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, ReactNode, useContext, useReducer } from 'react';
 
 type State = {
   currentStep: number;
@@ -16,6 +16,10 @@ type Action = {
 type ContextType = {
   state: State;
   dispatch: (action: Action) => void;
+};
+
+type FormProviderProps = {
+  children: ReactNode;
 };
 
 const initialData: State = {
@@ -55,7 +59,7 @@ const formReducer = (state: State, action: Action) => {
 };
 
 // Provider
-const FormProvider = ({ children }) => {
+const FormProvider = ({ children }: FormProviderProps) => {
   const [state, dispatch] = useReducer(formReducer, initialData);
   const value = { state, dispatch };
   return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
