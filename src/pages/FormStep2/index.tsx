@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import * as C from './styles';
 import { useForm, FormActions } from '../../contexts/FormContext';
 import { Theme } from '../../components/Theme';
@@ -22,7 +22,7 @@ export const FormStep2 = () => {
 
   const handleNextStep = () => {
     if (state.name !== '') {
-      navigate('/step2');
+      navigate('/step3');
     } else {
       alert('Enter your information.');
     }
@@ -47,7 +47,7 @@ export const FormStep2 = () => {
 
         <SelectOption
           title='I am a beginner'
-          description='I started to develop less than 2 years'
+          description='I have started to develop less than 2 years'
           icon='🥳'
           selected={state.level === 0}
           onClick={() => setLevel(0)}
@@ -61,6 +61,7 @@ export const FormStep2 = () => {
           onClick={() => setLevel(1)}
         />
 
+        <Link to='/' className='previousButton'>Previous</Link>
         <button onClick={handleNextStep}>Next</button>
       </C.Container>
     </Theme>
