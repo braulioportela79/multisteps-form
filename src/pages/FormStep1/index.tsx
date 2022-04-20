@@ -16,7 +16,12 @@ export const FormStep1 = () => {
   });
 
   const handleNextStep = () => {
-    navigate('/step2');
+      if(state.name !== '') {
+        navigate('/step2');      
+      } else {
+          alert('Enter your information.');
+      }
+    
   };
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
