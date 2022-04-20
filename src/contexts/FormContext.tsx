@@ -1,12 +1,12 @@
 import { createContext, useContext, useReducer } from 'react';
 
 const initialData = {
-    currentStep: 0,
-    name: '',
-    level: 0,
-    email: '',
-    github: ''
-}
+  currentStep: 0,
+  name: '',
+  level: 0,
+  email: '',
+  github: '',
+};
 
 // Context
 const FormContext = createContext(undefined);
@@ -37,15 +37,17 @@ const formReducer = (state, action) => {
 };
 
 // Provider
-const FormProvider = ({children}) => {
-    const [state, dispatch] = useReducer(formReducer, initialData);
-    const value = { state, dispatch};
-    return (
-        <FormContext.Provider value={value}>
-            {children}
-        </FormContext.Provider>
-    )
+const FormProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(formReducer, initialData);
+  const value = { state, dispatch };
+  return <FormContext.Provider value={value}>{children}</FormContext.Provider>;
 };
 
-
-
+// Context Hook
+const useForm = () => {
+  const context = useContext(FormContext);
+  if (context === undefined) {
+    throw new Error('useForm needs to be used inside FormProvider');
+  }
+  return context;
+};
